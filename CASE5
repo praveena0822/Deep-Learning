@@ -1,0 +1,20 @@
+import tensorflow as tf
+import numpy as np
+
+# XOR input and output
+X = np.array([[0,0], [0,1], [1,0], [1,1]], dtype=np.float32)
+Y = np.array([[0], [1], [1], [0]], dtype=np.float32)
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(4, input_dim=2, activation='relu'),
+    tf.keras.layers.Dense(1, activation='sigmoid')
+])
+
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+model.fit(X, Y, epochs=5000, verbose=0)
+
+# Predictions
+preds = model.predict(X)
+print("Predictions:")
+print(np.round(preds))
